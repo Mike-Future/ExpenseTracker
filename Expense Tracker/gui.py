@@ -44,7 +44,7 @@ def view_summary_window(root):
         tree.heading(col, text=col)
         tree.column(col, width=100)
 
-    tree.pack(fill=tk.Both, expand=True)
+    tree.pack(fill=tk.BOTH, expand=True)
 
     rows = get_all_expenses()
     for row in rows:
@@ -59,9 +59,9 @@ def delete_expense_window(root):
     id_entry = tk.Entry(delete_window)
     id_entry.grid(row=0, column=1, padx=10, pady=5)
 
-    def delete_expense():
-        expense_id = int(id_entry.get())
-        delete_expense_by_id(expense_id)
-        delete_window()
+    def delete_expense(expense_id):
+        print(f'Attempting to delete expense with ID: {expense_id}')
+        delete_expense_by_id(int(expense_id))
+        print(f'Deleted expense with ID: {expense_id}')
 
-    tk.Button(delete_window, text='Delete', command=delete_expense).grid(row=1, column=0, columnspan=2, pady=10)
+    tk.Button(delete_window, text='Delete', command=lambda: delete_expense(int(id_entry.get()))).grid(row=1, column=0, columnspan=2, pady=10)
